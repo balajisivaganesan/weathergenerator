@@ -1,10 +1,13 @@
 package com.tcs.dess.abim.weathergen.processor;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -43,11 +46,11 @@ public class WeatherGenerator extends Thread {
 		// Eg.Melbourne,-37.82,144.95,9 (City,Lat,Long,Elevation)
 		// Eg.Rain,+10,+20,1005,1010,90,100
 		// (Weather,Temphigh,Templow,Pressurehigh,Pressurelow,humidityhigh,humiditylow)
-		obj.readFiles("location.txt", "conditions.txt", loclist, condlist);
+		obj.readFiles("/location.txt", "/conditions.txt", loclist, condlist);
 
 		int loop_const = 0;
 		
-		File file = new File("./bin/weatheroutput.txt");
+		File file = new File("./weatheroutput.txt");
 
 		// if file doesnt exists, then create it
 		if (!file.exists()) {
@@ -108,30 +111,28 @@ public class WeatherGenerator extends Thread {
 	}
 
 	public void readFiles(String locFile, String condFile, Locationslist loclist, Conditionslist condlist)
-			throws FileNotFoundException {
+			throws IOException {
 
+		InputStream locis = WeatherGenerator.class.getResourceAsStream(locFile);
+        BufferedReader locreader = new BufferedReader(new InputStreamReader(locis));
+        InputStream condis = WeatherGenerator.class.getResourceAsStream(condFile);
+        BufferedReader condreader = new BufferedReader(new InputStreamReader(condis));
+        
+        String locationline, conditionline;
+        
 		// Get file from resources folder
-		ClassLoader classLoader = getClass().getClassLoader();
-
-		File locfile = new File(classLoader.getResource(locFile).getFile());
-		File condfile = new File(classLoader.getResource(condFile).getFile());
-
-		try {
-
-			Scanner locscanner = new Scanner(locfile);
-			Scanner condscanner = new Scanner(condfile);
-
+		
 			List<Locations> loctlist = new ArrayList<Locations>();
 			List<Conditions> condtlist = new ArrayList<Conditions>();
 
-			while (locscanner.hasNextLine()) {
+			while ((locationline = locreader.readLine()) != null) {
 				// set the bean for the locations
-				loctlist.add(SetLoc.setLocation(locscanner.nextLine()));
+				loctlist.add(SetLoc.setLocation(locationline));
 			}
 
-			while (condscanner.hasNextLine()) {
+			while ((conditionline = condreader.readLine()) != null) {
 				// set the bean for the conditions
-				condtlist.add(SetCond.setCondition(condscanner.nextLine()));
+				condtlist.add(SetCond.setCondition(conditionline));
 			}
 
 			// load the list of values to the location and the condition list
@@ -139,12 +140,6 @@ public class WeatherGenerator extends Thread {
 			loclist.setLocationlist(loctlist);
 			condlist.setConditionlist(condtlist);
 
-			locscanner.close();
-			condscanner.close();
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
+		
 	}
 }
