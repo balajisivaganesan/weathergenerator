@@ -19,10 +19,13 @@ It creates the weather simulation with the follwowing details
 
 The values created are just a simulation and is not meteorologically accurate. The simulator keeps on emitting the data.
 
-Just clone the maven repository and perform maven clean build. 
+Installtion Steps
 
-Updates on the way
+Just clone the maven repository. Then execute:
 
+mvn package appassembler:assemble
+
+Once the build is complete, in the target/appassembler/bin folder, there is an executable called "weathersim.bat". Just run this in cmd prompt and the weather data gets simulated. The output is also written in a file which is in the same folder and that is called "weatheroutput.txt"
 
 The output snapshot is given below
 
