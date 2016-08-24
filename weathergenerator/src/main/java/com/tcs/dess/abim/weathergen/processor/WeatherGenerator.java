@@ -1,7 +1,9 @@
 package com.tcs.dess.abim.weathergen.processor;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +30,7 @@ import com.tcs.dess.abim.weathergen.constants.*;
  *
  **/
 public class WeatherGenerator extends Thread {
-	public static void main(String[] args) throws FileNotFoundException {
+	public static void main(String[] args) throws IOException {
 
 		WeatherGenerator obj = new WeatherGenerator();
 
@@ -44,9 +46,20 @@ public class WeatherGenerator extends Thread {
 		obj.readFiles("location.txt", "conditions.txt", loclist, condlist);
 
 		int loop_const = 0;
+		
+		File file = new File("./bin/weatheroutput.txt");
 
+		// if file doesnt exists, then create it
+		if (!file.exists()) {
+			file.createNewFile();
+		}
+
+		FileWriter fw = new FileWriter(file.getAbsoluteFile());
+		BufferedWriter bw = new BufferedWriter(fw);
+		
+	
 		// The loop to decide how many values to be generated
-		while (loop_const < 1000) {
+		while (loop_const < 10) {
 			// reads the location details and keeps on repeating the values
 			for (int j = 0; j < loclist.getLocationlist().size(); j++) {
 
@@ -77,8 +90,9 @@ public class WeatherGenerator extends Thread {
 						condlist.getConditionlist().get(x).getHumd_high()) + "\n");
 
 				System.out.print(resultString);
-				// if a file is required, write these values
-
+				// The values are written to a file to be created in bin folder
+				bw.write(resultString.toString());
+				
 				// if there is no wait required, comment out this section
 				try {
 					Thread.sleep(200);
@@ -90,7 +104,7 @@ public class WeatherGenerator extends Thread {
 
 			loop_const++;
 		}
-
+		bw.close();
 	}
 
 	public void readFiles(String locFile, String condFile, Locationslist loclist, Conditionslist condlist)
