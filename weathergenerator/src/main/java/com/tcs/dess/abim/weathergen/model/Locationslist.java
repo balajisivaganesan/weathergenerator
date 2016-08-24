@@ -2,15 +2,19 @@ package com.tcs.dess.abim.weathergen.model;
 
 import java.util.List;
 
+/**
+ * 
+ * @author Balaji Sivaganesan. List to hold multiple location beans
+ */
 public class Locationslist {
-	//List to hold multiple location beans
-List<Locations> locationlist;
 
-public List<Locations> getLocationlist() {
-	return locationlist;
-}
+	List<Locations> locationlist;
 
-public void setLocationlist(List<Locations> locationlist) {
-	this.locationlist = locationlist;
-}
+	public List<Locations> getLocationlist() {
+		return locationlist;
+	}
+
+	public void setLocationlist(List<Locations> locationlist) {
+		this.locationlist = locationlist;
+	}
 }
