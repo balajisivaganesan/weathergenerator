@@ -8,12 +8,13 @@ import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
+
 import com.tcs.dess.abim.weathergen.helper.*;
 import com.tcs.dess.abim.weathergen.model.Conditions;
 import com.tcs.dess.abim.weathergen.model.Conditionslist;
 import com.tcs.dess.abim.weathergen.model.Locations;
 import com.tcs.dess.abim.weathergen.model.Locationslist;
-
+import com.tcs.dess.abim.weathergen.constants.*;
 /**
  * 
  * @author Balaji Sivaganesan. This program simulates weather conditions in
@@ -51,27 +52,27 @@ public class WeatherGenerator extends Thread {
 
 				StringBuilder resultString = new StringBuilder();
 
-				resultString.append(loclist.getLocationlist().get(j).getCity() + "|");
-				resultString.append(loclist.getLocationlist().get(j).getLatitude() + ",");
-				resultString.append(loclist.getLocationlist().get(j).getLongitude() + ",");
-				resultString.append(loclist.getLocationlist().get(j).getElevation() + "|");
-				resultString.append(RandDate.rand_date() + "|");
+				resultString.append(loclist.getLocationlist().get(j).getCity() + Constants.PIPE_SPLITTER);
+				resultString.append(loclist.getLocationlist().get(j).getLatitude() + Constants.COMMA_SPLITTER);
+				resultString.append(loclist.getLocationlist().get(j).getLongitude() + Constants.COMMA_SPLITTER);
+				resultString.append(loclist.getLocationlist().get(j).getElevation() + Constants.PIPE_SPLITTER);
+				resultString.append(RandDate.rand_date() + Constants.PIPE_SPLITTER);
 
 				// randomly select the climate either
 				// sunny,rain,snow,cloudy,clear etc.
 				// The file in the resource folder can be edited to make changes
 				int x = rand.nextInt(condlist.getConditionlist().size());
 
-				resultString.append(condlist.getConditionlist().get(x).getWeather_state() + "|");
+				resultString.append(condlist.getConditionlist().get(x).getWeather_state() + Constants.PIPE_SPLITTER);
 
 				// randomly generate values for temp,pressure,humidity based on
 				// high/low values specified.
 				resultString
 						.append(Formatter.check_sym(RandNum.rand_float(condlist.getConditionlist().get(x).getTemp_low(),
-								condlist.getConditionlist().get(x).getTemp_high())) + "|");
+								condlist.getConditionlist().get(x).getTemp_high())) + Constants.PIPE_SPLITTER);
 				resultString.append(
 						Formatter.check_precision(RandNum.rand_float(condlist.getConditionlist().get(x).getPres_low(),
-								condlist.getConditionlist().get(x).getPres_high())) + "|");
+								condlist.getConditionlist().get(x).getPres_high())) + Constants.PIPE_SPLITTER);
 				resultString.append(RandNum.rand_int(condlist.getConditionlist().get(x).getHumd_low(),
 						condlist.getConditionlist().get(x).getHumd_high()) + "\n");
 
@@ -92,14 +93,14 @@ public class WeatherGenerator extends Thread {
 
 	}
 
-	public void readFiles(String fileName1, String fileName2, Locationslist loclist, Conditionslist condlist)
+	public void readFiles(String locFile, String condFile, Locationslist loclist, Conditionslist condlist)
 			throws FileNotFoundException {
 
 		// Get file from resources folder
 		ClassLoader classLoader = getClass().getClassLoader();
 
-		File locfile = new File(classLoader.getResource(fileName1).getFile());
-		File condfile = new File(classLoader.getResource(fileName2).getFile());
+		File locfile = new File(classLoader.getResource(locFile).getFile());
+		File condfile = new File(classLoader.getResource(condFile).getFile());
 
 		try {
 
