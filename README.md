@@ -25,6 +25,7 @@ Updates on the way
 
 
 The output snapshot is given below
+
 Melbourne|-37.82,144.95,9|2016-08-05T01:21:25Z|Rain|+16.3|1009.4|91
 
 Sydney|-33.87,151.21,19|2016-09-11T17:54:50Z|Clear|+23.5|1022.5|66
