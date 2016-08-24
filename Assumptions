@@ -1,0 +1,14 @@
+Assumptions
+
+1) Since the requirement was for simulating weather data for 10+ regions, I have considered 12 locations.
+2) From the various geography details available, i have obtained the lat,long and elevation.
+3) Since this is consistent across the simulation, have mentioned these in a configurable file in resources folder called "Locations.txt". Any new location required
+also can be added or modified here
+4) values for simulation are taken at random. So a random function to create a ISO8601 format date was created.
+5) At any point of time, randomly the weather conditions are chosen. In the sample data, there were only three values - Sunny, Rain and Snow. These
+three alone will not be sufficient for all climatic conditions. So added two more values - Cloudy and Clear. This will almost cover all the weather conditions
+6) For a given condition sunny, on analysis of various weather values, the temperature is always higher, pressure is in a range and humidity is low. At random,
+i have studied some of the past data across those regions. So finally came up with a minimum and maximum values for temperature, pressure and humidity.
+7) Similar values are arrived at for other weather conditions like Cloudy, Clear, Snow and Rain. The file is in resources folder called "conditions.txt"
+8) A random function to generate a value between these max and min values was created.
+9) A string with all these values are populated and displayed onto stdout. Also a file is written for this in bin folder called "weatheroutput.txt". The user can make use of these for the simulation data
