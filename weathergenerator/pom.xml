@@ -22,4 +22,23 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
+  
+  <build>  
+   
+  <plugins>  
+    <plugin> 
+      <groupId>org.codehaus.mojo</groupId>  
+      <artifactId>appassembler-maven-plugin</artifactId>  
+      <configuration>
+       <programs>  
+         <program>  
+            <mainClass>com.tcs.dess.abim.weathergen.processor.WeatherGenerator</mainClass>
+            <name>weathersim</name>
+         </program>
+       </programs>   
+      </configuration>  
+    </plugin>  
+ </plugins>
+ </build>
+  
 </project>
