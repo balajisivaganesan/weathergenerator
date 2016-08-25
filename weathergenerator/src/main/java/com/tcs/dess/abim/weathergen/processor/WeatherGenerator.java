@@ -62,7 +62,7 @@ public class WeatherGenerator extends Thread {
 		
 	
 		// The loop to decide how many values to be generated
-		while (loop_const < 10) {
+		while (loop_const < Constants.LOOP_LIMIT) {
 			// reads the location details and keeps on repeating the values
 			for (int j = 0; j < loclist.getLocationlist().size(); j++) {
 
