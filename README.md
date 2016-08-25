@@ -1,7 +1,7 @@
 # weathergenerator
 This is a weather simulator module which creates weather measurements across various locations and times.
 
-It creates the weather simulation with the follwowing details
+It creates the weather simulation with the following details
 
 1) Location (Name of the location)
 
