@@ -23,13 +23,15 @@ The values created are just a simulation and is not meteorologically accurate. T
 Installtion Steps
 
 
-Just clone the maven repository. Then execute:
+Just clone the maven repository. Then within the folder execute:
 
 mvn package appassembler:assemble
 
 Once the build is complete, in the target/appassembler/bin folder, there is an executable called "weathersim.bat". Just run this in cmd prompt and the weather data gets simulated. The output is also written in a file which is in the same folder and that is called "weatheroutput.txt"
 
 
+
+Currently the size of the loop is 10. If this needs to be changed, update the constants Constants.LOOP_LIMIT to required values
 
 
 The output snapshot is given below
